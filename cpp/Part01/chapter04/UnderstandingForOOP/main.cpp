@@ -3,6 +3,7 @@
 int main(void){
     FruitBuyer buyer(10000, 0);
     FruitSeller seller(1000, 50000, 50);
+    FruitBuyer buy(-100, 0);
 
     seller.PrintSellerInfo();
     buyer.PrintBuyerInfo();

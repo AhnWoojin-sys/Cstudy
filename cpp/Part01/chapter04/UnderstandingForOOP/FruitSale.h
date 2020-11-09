@@ -13,7 +13,7 @@ class FruitSeller{
     public:
         FruitSeller(int p, int m, int c)
             : APPLE_PRICE(p), money(m), countApple(50){
-                // is_empty
+                if(m<0)cout<<"Do not exist"<<endl;
             }
         int SaleApples(int m);
         void const PrintSellerInfo();
@@ -24,7 +24,10 @@ class FruitBuyer{
         int money;
         int countApple;
     public:
-        FruitBuyer(int m, int c);
+        FruitBuyer(int m, int c)
+            : money(m), countApple(0){
+                if(m<0)cout<<"Do not exist"<<endl;
+            }
         void BuyApples(FruitSeller &seller, int m);
         void const PrintBuyerInfo();
 };

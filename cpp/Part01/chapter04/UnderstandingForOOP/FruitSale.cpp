@@ -2,7 +2,7 @@
 #include "FruitSale.h"
 
 using namespace std;
-// initalize FruitSeller object
+
 int FruitSeller::SaleApples(int m){
     if(m < 0)
         cout<<"You have to type positive number in money"<<endl;
@@ -20,11 +20,7 @@ void const FruitSeller::PrintSellerInfo(){
     cout<<"Number of apples: "<<countApple<<endl;
 }
 
-// initalize FruitBuyer object
-FruitBuyer::FruitBuyer(int m, int c){
-    money = m;
-    countApple= c;
-}
+
 
 void FruitBuyer::BuyApples(FruitSeller &seller, int m){
     if(m < 0)
