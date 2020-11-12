@@ -24,17 +24,23 @@ class NameCard{
         char* phoneNumber;
         int companyRank;
     public:
-        NameCard(const char* myname,const char* mycompany,const char* myphoneNumber, int mycompanyRank){
-            int nameLen = strlen(myname) + 1;
-            int companyLen = strlen(mycompany) + 1;
-            int phoneNumberLen = strlen(myphoneNumber) + 1;
-            name = new char[nameLen];
-            company = new char[companyLen];
-            phoneNumber = new char[companyLen];
-            strcpy(name, myname);
-            strcpy(company, mycompany);
-            strcpy(phoneNumber, myphoneNumber);
-            companyRank = mycompanyRank; 
+        NameCard(const char* name, const char* company, const char* phoneNumber, int companyRank)
+        :companyRank(companyRank){
+            this->name = new char[strlen(name)+1];
+            this->company = new char[strlen(company)+1];
+            this->phoneNumber = new char[strlen(phoneNumber)+1];
+            strcpy(this->name, name);
+            strcpy(this->company, company);
+            strcpy(this->phoneNumber, phoneNumber);
+        }
+        NameCard(NameCard &copy)
+        :companyRank(copy.companyRank){
+            name = new char[strlen(copy.name)+1];
+            company = new char[strlen(copy.company)+1];
+            phoneNumber = new char[strlen(copy.phoneNumber)+1];
+            strcpy(name, copy.name);
+            strcpy(company, copy.company);
+            strcpy(phoneNumber, copy.phoneNumber);
         }
         void ShowNameCardInfo() const;
         ~NameCard(){
