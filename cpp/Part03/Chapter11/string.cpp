@@ -113,7 +113,7 @@ void MyString::reserve(int size){
         for(int i=0;i<stringLength;i++){
             stringContent[i] = previousStringPtr[i];
         }
-    delete []previousStringPtr;
+        delete []previousStringPtr;
     }
 
     // Keep do not anything, if size is smaller than memory allocated
@@ -128,15 +128,21 @@ char MyString::at(int idx){
 
 
 MyString& MyString::insert(int idx, const MyString& str){
-    if(str.stringLength < idx || 0 > idx){
-        cout<<"Nothing string  or character in parameter"<<endl;
+    // Do not anything when there is not have char in idx
+    if(stringLength < idx || 0 > idx){
+        cout<<"Nothing string or character in parameter"<<endl;
         return *this;
     }
-    // if full capacity
+    // if this string + insert string is more than this.capacity
     if(stringLength + str.stringLength > memoryCapacity){
         char* previousStringContent = stringContent; // Save previous string
-        memoryCapacity = stringLength + str.stringLength;
-        stringContent = new char[memoryCapacity]; 
+
+        if(stringLength + str.stringLength < 2*memoryCapacity)
+            memoryCapacity *= 2;
+        else
+            memoryCapacity = stringLength + str.stringLength;
+
+        stringContent = new char[memoryCapacity]; // Allocate memory 
 
         int i;
         for(i=0;i<idx;i++){
@@ -155,7 +161,7 @@ MyString& MyString::insert(int idx, const MyString& str){
     }
 
     for(int i=stringLength-1;i>=idx;i--){
-        stringContent[i + str.stringLength] = str.stringContent[i]; 
+        stringContent[i + str.stringLength] = stringContent[i]; 
     }
     for(int i=0;i<str.stringLength;i++){
         stringContent[i+idx] = str.stringContent[i];
@@ -174,19 +180,11 @@ MyString& MyString::insert(int idx, char c){
 }
 
 int main(void){
-    MyString c("woo");
-    MyString str("Hel");
-    
-    str.println();
-    str.println();
-
-    str.assign("What");
-    str.println();
-    str.reserve(20);
-    cout<<str.capacity()<<endl;
-    str.insert(2, c);
-    cout<<str.length()<<endl;
-    str.println();
+    MyString Ahn("Ahn  jin");
+    MyString str("woo");
+    Ahn.reserve(20);
+    Ahn.insert(4, str);
+    Ahn.println();
 
     return 0;
 };
